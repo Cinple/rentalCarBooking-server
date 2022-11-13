@@ -4,6 +4,8 @@ import com.example.rentalcarbookingserver.entity.RentalInfo;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * 车辆租赁信息管理
@@ -11,10 +13,9 @@ import java.util.*;
 @Component
 public class CarRentalsManager {
 
-    private List<RentalInfo> rentalInfoList = new ArrayList<>();
+    private List<RentalInfo> rentalInfoList = new CopyOnWriteArrayList<>();
 
-    private Map<Integer, List<RentalInfo>> rentalMap = new HashMap<>();
-
+    private Map<Integer, List<RentalInfo>> rentalMap = new ConcurrentHashMap<>();
 
     public List<RentalInfo> getRentalInfoList() {
         return rentalInfoList;

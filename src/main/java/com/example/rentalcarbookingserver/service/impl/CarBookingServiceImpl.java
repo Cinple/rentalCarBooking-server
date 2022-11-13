@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
@@ -92,16 +91,8 @@ public class CarBookingServiceImpl implements CarBookingService {
         TreeSet<RentalInfo> rentalStartSet = new TreeSet<>(RentalInfo.START_DATE_COMPARATOR);
         rentalStartSet.addAll(rentalInfoList);
 
-//        TreeSet<RentalInfo> rentalEndSet = new TreeSet<>(RentalInfo.END_DATE_COMPARATOR);
-//        rentalEndSet.addAll(rentalInfoList);
-        //如果开始时间或者结束时间相同则意味着冲突
-//        if (rentalStartSet.contains(rentalInfo) || rentalEndSet.contains(rentalInfo)) {
-//            return null;
-//        }
         RentalInfo lowerStart = rentalStartSet.lower(rentalInfo);
         RentalInfo higherStart = rentalStartSet.higher(rentalInfo);
-//        RentalInfo lowerEnd = rentalEndSet.lower(rentalInfo);
-//        RentalInfo higherEnd = rentalEndSet.higher(rentalInfo);
         //start1 start_current end1的情况
         if (lowerStart != null && lowerStart.getEndDate().compareTo(rentalInfo.getStartDate()) >= 0) {
             return null;
