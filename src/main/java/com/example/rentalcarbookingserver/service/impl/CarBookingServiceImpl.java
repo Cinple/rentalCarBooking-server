@@ -90,6 +90,11 @@ public class CarBookingServiceImpl implements CarBookingService {
         }
         TreeSet<RentalInfo> rentalStartSet = new TreeSet<>(RentalInfo.START_DATE_COMPARATOR);
         rentalStartSet.addAll(rentalInfoList);
+        TreeSet<RentalInfo> rentalEndSet = new TreeSet<>(RentalInfo.END_DATE_COMPARATOR);
+        rentalEndSet.addAll(rentalInfoList);
+        if (rentalStartSet.contains(rentalInfo) || rentalEndSet.contains(rentalInfo)) {
+            return null;
+        }
 
         RentalInfo lowerStart = rentalStartSet.lower(rentalInfo);
         RentalInfo higherStart = rentalStartSet.higher(rentalInfo);
